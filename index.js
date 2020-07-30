@@ -3,6 +3,9 @@ const request = require('request');
 
 //todo add form to add and remove server
 const servers = ['http://localhost:9090', 'http://localhost:9091', 'http://localhost:9092', 'http://localhost:9093' ];
+
+let accessLogs = [];
+
 let cur = 0;
 
 const handler = (req, res) => {
@@ -12,9 +15,22 @@ const handler = (req, res) => {
 
   const _request = request({ url: servers[cur] + req.url })
   .on('response', res =>{
-    //todo add timestamp and add result to stats object
-    console.log('success');
-    console.log(res.request.href)
+    //todo tried to open an access to the stat but i think there's a problem with the express. 
+    // instead i will reroute everything to a stat server project
+
+    let timeStamp = new Date();
+
+
+    // console.log(timeStamp.getHours())
+
+    let accessLog = {
+      link: res.request.href,
+      timeStamp : timeStamp,
+      hour: timeStamp.getHours()
+    }
+    accessLogs.push(accessLog);
+    // console.log(accessLogs)
+
   })
   .on('error', error=>{
     
@@ -25,5 +41,9 @@ const handler = (req, res) => {
   cur = (cur + 1) % servers.length;
 };
 const server = express().get('*', handler).post('*', handler);
+
+
+
+
 
 server.listen(8080);
