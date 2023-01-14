@@ -42,4 +42,6 @@ const server = express().get('*', handler).post('*', handler);
 
 
 
-server.listen(80);
+server.listen(80, '0.0.0.0', ()=>{
+  console.log("server is listening ");
+});
