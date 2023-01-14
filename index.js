@@ -2,7 +2,7 @@ const express = require('express');
 const request = require('request');
 
 //todo add form to add and remove server
-const servers = ['http://localhost:9090', 'http://localhost:9091', 'http://localhost:9092', 'http://localhost:9093' ];
+const servers = ['http://143.198.90.161:5000/', 'http://23.97.60.169:5000/', ];
 
 let accessLogs = [];
 
@@ -20,8 +20,6 @@ const handler = (req, res) => {
 
     let timeStamp = new Date();
 
-
-    // console.log(timeStamp.getHours())
 
     let accessLog = {
       link: res.request.href,
@@ -44,6 +42,4 @@ const server = express().get('*', handler).post('*', handler);
 
 
 
-
-
-server.listen(8080);
+server.listen(80);
