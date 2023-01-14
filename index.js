@@ -43,6 +43,6 @@ const server = express().get('*', handler).post('*', handler);
 
 
 
-server.listen(443, '0.0.0.0', function() {
+server.listen(8080, '0.0.0.0', function() {
   console.log("... port %d in %s mode",server.settings.env);
 });
