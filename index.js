@@ -9,6 +9,7 @@ let accessLogs = [];
 let cur = 0;
 
 const handler = (req, res) => {
+  console.log("killbot activated")
   // Pipe the vanilla node HTTP request (a readable stream) into `request`
   // to the next server URL. Then, since `res` implements the writable stream
   // interface, you can just `pipe()` into `res`.
@@ -17,7 +18,7 @@ const handler = (req, res) => {
   .on('response', res =>{
     //todo tried to open an access to the stat but i think there's a problem with the express. 
     // instead i will reroute everything to a stat server project
-
+    
     let timeStamp = new Date();
 
 
@@ -42,6 +43,6 @@ const server = express().get('*', handler).post('*', handler);
 
 
 
-server.listen(80, '0.0.0.0', ()=>{
-  console.log("server is listening ");
+server.listen(443, '0.0.0.0', function() {
+  console.log("... port %d in %s mode",server.settings.env);
 });
